@@ -2,6 +2,7 @@ cronjob:
   name: annotate-resources
   schedule: "*/5 * * * *"
   image: bitnami/kubectl:latest
+  namespace: default
 
 targets:
   - kind: deployment
