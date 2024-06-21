@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ .Values.cronjob.name }}
-  namespace: {{ .Values.cronjob.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.cronjob.name }}
 spec:
@@ -11,6 +11,7 @@ spec:
     spec:
       template:
         spec:
+          serviceAccountName: {{ .Values.cronjob.serviceAccountName }}
           containers:
           - name: {{ .Values.cronjob.name }}
             image: {{ .Values.cronjob.image }}
@@ -19,6 +20,6 @@ spec:
             - -c
             - >
               {{- range $target := .Values.targets }}
-                kubectl annotate {{ $target.kind }} {{ $target.name }} {{ $target.key }}="{{ $target.value }}" --overwrite -n {{ $.Values.cronjob.namespace }};
+                kubectl annotate {{ $target.kind }} {{ $target.name }} {{ $target.key }}="{{ $target.value }}" --overwrite -n {{ $target.namespace }};
               {{- end }}
           restartPolicy: OnFailure
