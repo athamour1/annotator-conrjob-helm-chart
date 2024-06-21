@@ -1,0 +1,6 @@
+apiVersion: v2
+name: cronjob-annotator
+description: A Helm chart for Kubernetes CronJob to annotate multiple resources
+
+version: 0.1.0
+appVersion: "1.0"

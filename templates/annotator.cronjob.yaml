@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Values.cronjob.name }}
+  labels:
+    app: {{ .Values.cronjob.name }}
+spec:
+  schedule: "{{ .Values.cronjob.schedule }}"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ .Values.cronjob.name }}
+            image: {{ .Values.cronjob.image }}
+            command:
+            - /bin/sh
+            - -c
+            - >
+              {{- range $target := .Values.targets }}
+                kubectl annotate {{ $target.kind }} {{ $target.name }} {{ $target.key }}="{{ $target.value }}" --overwrite;
+              {{- end }}
+          restartPolicy: OnFailure

@@ -1,0 +1,14 @@
+cronjob:
+  name: annotate-resources
+  schedule: "*/5 * * * *"
+  image: bitnami/kubectl:latest
+
+targets:
+  - kind: deployment
+    name: my-deployment-1
+    key: example.com/annotation1
+    value: value1
+  - kind: deployment
+    name: my-deployment-2
+    key: example.com/annotation2
+    value: value2
