@@ -20,7 +20,8 @@ spec:
             - -c
             - |
               {{- range $target := .Values.targets }}
-              kubectl annotate {{ $target.kind }} {{ $target.name }} {{ $target.key }}="{{ $target.value }}" --overwrite -n {{ $target.namespace }} && \
+              kubectl get {{ $target.kind }} -n fortesie -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | grep '^{{ $target.name }}' | head -n 1 && \
+              kubectl annotate {{ $target.kind }} $(kubectl get {{ $target.kind }} -n fortesie -o jsonpath='{.items[*].metadata.name}' | tr ' ' '\n' | grep '^{{ $target.name }}' | head -n 1) {{ $target.key }}="{{ $target.value }}" --overwrite -n {{ $target.namespace }} && \
               {{- end }}
               echo Done!
           restartPolicy: OnFailure

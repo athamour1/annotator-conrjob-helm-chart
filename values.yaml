@@ -5,7 +5,7 @@ cronjob:
   serviceAccountName: annotate-resources-service-account
 
 targets:
-  - kind: pod
+  - kind: pods
     name: fiware-fortesie-authzforce
     key: backup.velero.io/backup-volumes
     value: "authzforce"
