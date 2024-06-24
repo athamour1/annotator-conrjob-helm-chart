@@ -4,6 +4,6 @@ metadata:
   name: cronjob-annotator-role
   namespace: {{ .Release.Namespace }}
 rules:
-  - apiGroups: [""]
+  - apiGroups: ["*"]
     resources: ["pods", "deployments"]
     verbs: ["get", "list", "watch", "patch"]
