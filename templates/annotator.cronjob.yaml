@@ -18,9 +18,9 @@ spec:
             command:
             - /bin/sh
             - -c
-            - >
+            - |
               {{- range $target := .Values.targets }}
-                kubectl annotate {{ $target.kind }} {{ $target.name }} {{ $target.key }}="{{ $target.value }}" --overwrite -n {{ $target.namespace }} &&\
+              kubectl annotate {{ $target.kind }} {{ $target.name }} {{ $target.key }}="{{ $target.value }}" --overwrite -n {{ $target.namespace }} && \
               {{- end }}
               echo Done!
           restartPolicy: OnFailure
