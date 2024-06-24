@@ -3,6 +3,7 @@ cronjob:
   schedule: "*/5 * * * *"
   image: bitnami/kubectl:latest
   namespace: default
+  serviceAccountName: annotate-resources-service-account
 
 targets:
   - kind: deployment
