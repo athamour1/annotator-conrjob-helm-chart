@@ -10,3 +10,31 @@ targets:
     key: backup.velero.io/backup-volumes
     value: "authzforce"
     namespace: fortesie
+  - kind: pods
+    name: fiware-fortesie-mongo-db
+    key: backup.velero.io/backup-volumes
+    value: "mongodb"
+    namespace: fortesie
+  - kind: pods
+    name: fiware-fortesie-mysql-db
+    key: backup.velero.io/backup-volumes
+    value: "fortesie-mysql-db"
+    namespace: fortesie
+  - kind: pods
+    name: fiware-fortesie-timescale-db
+    key: backup.velero.io/backup-volumes
+    value: "timescaledb"
+    namespace: fortesie
+  - kind: pods
+    name: elasticsearch-master
+    key: backup.velero.io/backup-volumes
+    value: "elasticsearch-master"
+    namespace: fortesie
+  - kind: pods
+    name: mongodb
+    key: backup.velero.io/backup-volumes
+    value: "datadir"
+    namespace: fortesie
+
+
+
